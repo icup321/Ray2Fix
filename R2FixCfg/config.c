@@ -36,7 +36,6 @@ char *a_szFilesToDelete[] = {
 	"goggame.sdb",
 	"goglog.ini",
 	"gog.ico",
-	"support.ico",
 	"EULA.txt",
 	"webcache.zip",
 	"nglide_config.exe",
@@ -126,7 +125,7 @@ void WriteUbiIni( void )
 	WritePrivateProfileString(szUbiR2, "GLI_Device", szDevice, szUbiPath);
 
 	// Display mode
-	sprintf_s(szBuffer, sizeof(szBuffer), "1 - %i x %i x 16", g_dmCurrentMode.dwWidth, g_dmCurrentMode.dwHeight);
+	sprintf_s(szBuffer, sizeof(szBuffer), "1 - %i x %i x 32", g_dmCurrentMode.dwWidth, g_dmCurrentMode.dwHeight);
 	WritePrivateProfileString(szUbiR2, "GLI_Mode", szBuffer, szUbiPath);
 
 	// Tweaks
@@ -145,7 +144,7 @@ void WriteDegeIni( void )
 	// These values should never change, but write them anyway in case the user messes up the config
 	WritePrivateProfileString(szDegeGeneral, "ProgressiveScanlineOrder", szTrue, szDegePath);
 	WritePrivateProfileString(szDegeGeneral, "EnumerateRefreshRates", szTrue, szDegePath);
-	WritePrivateProfileString(szDegeGeneral, "ScalingMode", "stretched_ar", szDegePath);
+	WritePrivateProfileString(szDegeGeneral, "ScalingMode", "unspecified", szDegePath);
 	WritePrivateProfileString(szDegeGeneral, "KeepWindowAspectRatio", szTrue, szDegePath);
 	WritePrivateProfileString(szDegeGlide, "VideoCard", "voodoo_2", szDegePath);
 	WritePrivateProfileString(szDegeGlide, "OnboardRAM", "12", szDegePath);
@@ -181,7 +180,7 @@ void CleanUpGogMess( void )
 		DeleteFile(szFilePath);
 	}
 
-	sprintf_s(szFindQuery, MAX_PATH, ".\\%s", "goggame-*.*");
+	sprintf_s(szFindQuery, MAX_PATH, ".\\%s", "goggame- ");
 	HANDLE hFind = FindFirstFile(szFindQuery, &ffd);
 
 	if ( hFind != INVALID_HANDLE_VALUE )
